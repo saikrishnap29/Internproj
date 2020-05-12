@@ -1,8 +1,6 @@
 from django.shortcuts import render,redirect
 from .forms import SubmitForm
 import json
-from django.http import JsonResponse
-from django.contrib.auth.models import Group
 # Create your views here.
 def home(request):
     form = SubmitForm()
@@ -18,10 +16,12 @@ def home(request):
 
 
 def convertFormToJSON(form):
-    formType = form.cleaned_data.get('Type')
-    formContact = form.cleaned_data.get('Contact')
+    Type = form.cleaned_data.get('Type')
+    Contact = form.cleaned_data.get('ContactID')
     Date = form.cleaned_data.get('Date')
     DueDate = form.cleaned_data.get('DueDate')
+    DateString = form.cleaned_data.get('DateString')
+    DueDateString = form.cleaned_data.get('DueDateString')
     LineAmountTypes = form.cleaned_data.get('LineAmountTypes')
     Description = form.cleaned_data.get('Description')
     Quantity = form.cleaned_data.get('Quantity')
@@ -30,12 +30,14 @@ def convertFormToJSON(form):
     DiscountRate = form.cleaned_data.get('DiscountRate')
 
     formAsJSON = {
-        "Type": formType,
+        "Type": Type,
         "Contact": {
-            "ContactID": formContact
+            "ContactID": Contact
         },
         "Date": Date,
         "DueDate": DueDate,
+        "DateString": DateString,
+        "DueDateString": DueDateString,
         "LineAmountTypes": LineAmountTypes,
         "LineItems": [
             {
