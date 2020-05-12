@@ -18,5 +18,5 @@ from django.urls import path,include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('',include('xero.urls')),
+    path('',include('xero_sosio.urls')),
 ]
